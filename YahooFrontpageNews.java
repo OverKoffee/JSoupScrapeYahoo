@@ -30,6 +30,8 @@ public class YahooFrontpageNews {
         System.out.print("Enter a topic: ");
         String getUserTopic = scanner.nextLine();
 
+        System.out.println("-----Yahoo Front Page Headlines for " + getUserTopic + "-----\n");
+
         //filter headers that contain getUserTopic
         int numOfTitle = 0;
         GrabHeadersLoop: for (Element h3s : headers){
@@ -43,6 +45,30 @@ public class YahooFrontpageNews {
                 break GrabHeadersLoop;
             }
         }
+        System.out.println("\n");
+
+
+
+        //get newest 5 tweets from Trump
+        String twitterUrl = "https://twitter.com/realDonaldTrump";
+
+        Document twitterDoc = Jsoup.connect(twitterUrl).get();
+
+        Elements tweetTitles = twitterDoc.getElementsByClass("TweetTextSize");
+
+        System.out.println("-----Most recent 5 tweets by President Trump-----\n");
+
+        //filter headers that contain getUserTopic
+        numOfTitle = 0;
+        GrabTweetsLoop: for (Element tweet : tweetTitles){
+            System.out.println((numOfTitle + 1) + ": " + tweet.text());
+
+            numOfTitle += 1;
+            if (numOfTitle == 5){
+                break GrabTweetsLoop;
+            }
+        }
+
 
     }
 }
