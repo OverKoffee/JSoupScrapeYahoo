@@ -33,7 +33,7 @@ public class YahooFrontpageNews {
         //filter headers that contain getUserTopic
         int numOfTitle = 0;
         GrabHeadersLoop: for (Element h3s : headers){
-            if (h3s.text().contains(getUserTopic)) {
+            if (h3s.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
                 System.out.println((numOfTitle + 1) + ": " + h3s.text());
                 numOfTitle += 1;
             }
