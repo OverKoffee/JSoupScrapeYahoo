@@ -16,16 +16,16 @@ public class YahooFrontpageNews {
 
     public static void main(String[] args) throws IOException {
         String url = "https://www.yahoo.com/";
-        int h3count = 0;
+        int spanCount = 0;
         int titleCount = 0;
 
         Document document = Jsoup.connect(url).get();
 
-        Elements headers = document.select("h3");
+        Elements headers = document.select("*");
 
         //get number of headers
         for (Element ele : headers){
-            h3count += 1;
+            spanCount += 1;
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -36,14 +36,14 @@ public class YahooFrontpageNews {
 
         //filter headers that contain getUserTopic
         int numOfTitle = 0;
-        GrabHeadersLoop: for (Element h3s : headers){
-            if (h3s.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
-                System.out.println((numOfTitle + 1) + ": " + h3s.text());
+        GrabHeadersLoop: for (Element span : headers){
+            if (span.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
+                System.out.println((numOfTitle + 1) + ": " + span.text());
                 numOfTitle += 1;
             }
 
             titleCount += 1;
-            if (titleCount == h3count){
+            if (titleCount == spanCount){
                 break GrabHeadersLoop;
             }
         }
