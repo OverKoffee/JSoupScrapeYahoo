@@ -15,23 +15,23 @@ import java.util.Scanner;
 public class YahooFrontpageNews {
 
     public static void main(String[] args) throws IOException {
-        String url = "https://www.yahoo.com/";
-
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a news topic keyword: ");
         String getUserTopic = scanner.nextLine();
 
+
         System.out.println("-----Yahoo Front Page Headlines for " + getUserTopic + "-----\n\n");
 
-        Document document = Jsoup.connect(url).get();
-        Elements headers = document.getElementsByTag("span");
+
+        Document document = Jsoup.connect("https://www.yahoo.com/").get();
+        Elements headers = document.select("a[href]");
 
         int numOfTitle = 0;
 
         //get number of headers
-        for (Element spanVar : headers) {
-            if (spanVar.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
-                System.out.println((numOfTitle + 1) + ": " + spanVar.text());
+        for (Element newsHeadline : headers) {
+            if (newsHeadline.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
+                System.out.println((numOfTitle + 1) + ": " + newsHeadline.text());
                 numOfTitle += 1;
             }
         }
