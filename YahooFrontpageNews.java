@@ -1,5 +1,5 @@
 /**
- * Created by Redmal on 1/27/2019.
+ * Created by Redmal on 2/2/2019.
  * grabs the headlines off Yahoo front page
  * that contain the word/topic a user enters
  */
@@ -32,6 +32,10 @@ public class YahooFrontpageNews {
         for (Element newsHeadline : headers) {
             if (newsHeadline.text().toLowerCase().contains(getUserTopic.toLowerCase())) {
                 System.out.println((numOfTitle + 1) + ": " + newsHeadline.text());
+                numOfTitle += 1;
+            }
+            else if (newsHeadline.text().contains(getUserTopic)){ //testing if somehow it grabs headlines somehow if conversion fails
+                System.out.println((numOfTitle + 1) + "_Case: " + newsHeadline.text());
                 numOfTitle += 1;
             }
         }
